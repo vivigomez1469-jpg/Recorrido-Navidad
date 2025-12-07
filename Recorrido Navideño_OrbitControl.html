@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Recorrido Navideño</title>
+    <link rel="icon" href="icono.png" type="image/png">. 
+</head>
+<body>
+
+    <canvas id="myCanvas">
+        <!--El elemento HTML canvas se puede utilizar para dibujar gráficos a través de
+        secuencias de comandos (por lo general JavaScript ).-->
+    </canvas>
+
+    <!-- Aquí va todo el código de three.js -->
+    <!-- script type="importmap" importa las librerías necesarias para three.js-->
+      <script src="./font/1.js"></script>
+    <script type="importmap">
+    {                                                                                                      
+        "imports":{
+            "three": "./js/three.module.js",
+            "three/OrbitControls": "./js/OrbitControls.js"
+        }
+    }
+</script>
+    <script type="module">
+        //🗃️🗃️ Mandar llamar a la librería
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/OrbitControls';
+        console.log(OrbitControls);
+        import {TextGeometry} from "./js/TextGeometry.js";
+        import {FontLoader} from "./js/FontLoader.js";
+        import arbol from "./objetos/arbolA.js"
+        import arbolito from "./objetos/arbolito.js"
+        import cartel1 from "./objetos/cartel1.js"
+        import cartel2 from "./objetos/cartel2.js"
+        import cartel3 from "./objetos/cartel3.js"
+        import cartel4 from "./objetos/cartel4.js"
+        import reno from "./objetos/reno.js"
+        import reno2 from "./objetos/reno2.js"
+        import asiento from "./objetos/asiento.js"
+        import fabrica from "./objetos/fabrica.js"
+        import regalo from "./objetos/regalo.js"
+        import reg4 from "./objetos/Regalo4.js"
+        import reg5 from "./objetos/Regalo5.js"
+        import reg2 from "./objetos/Regalo2.js"
+        import reg3 from "./objetos/Regalo3.js"
+        import reg6 from "./objetos/Regalo6.js"
+        import reg7 from "./objetos/Regalo7.js"
+        import reg8 from "./objetos/Regalo8.js"
+        import reg9 from "./objetos/Regalo9.js"
+        import reg10 from "./objetos/Regalo10.js"
+        import reg1 from "./objetos/Regalo.js"
+        import tren from "./objetos/tren.js"
+        import tren2 from "./objetos/tren2.js"
+        import corona from "./objetos/corona.js"
+        import campana from "./objetos/campana.js"
+        import mosaico from "./objetos/mosaico.js"
+        import mosaico2 from "./objetos/mosaico2.js"
+        import trineo from "./objetos/trineo.js"
+        import iglu from "./objetos/iglu.js"
+        import muñe from "./objetos/Muñeco.js"
+        import mesa from "./objetos/mesa.js"
+        import plato from "./objetos/plato.js"
+        
+
+        //🕹️🕹️ Renderer - Realiza una conexión entre el código y el canvas
+        var renderer = new THREE.WebGLRenderer({
+            canvas: document.getElementById('myCanvas'), antialias: true,
+        });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x7A76E8);
+
+        // 🎬 Creando nueva escena - Es el espacio donde se colocan los objetos
+        var scene = new THREE.Scene();
+
+        //🎥🎥 Agregar una cámara de perspectiva
+        var camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 2000);
+        scene.add(camera);
+
+        //Settings de la cámara
+        camera.position.set(0, 320, 1210);
+
+        // Redimensionar el canvas dinámicamente
+        const sizes = {
+            width: window.innerWidth,
+            height: window.innerHeight,
+        };
+
+        const canvas = document.getElementById('myCanvas');
+
+        window.addEventListener('resize', () => {
+
+            sizes.width = window.innerWidth;
+            sizes.height = window.innerHeight;
+
+            camera.aspect = sizes.width / sizes.height;
+            camera.updateProjectionMatrix();
+
+            renderer.setSize(sizes.width, sizes.height);
+
+        });
+
+        // Añadiendo los OrbitControls
+        var controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+
+        //Codigo para realizr objetos
+        var loader = new THREE.TextureLoader();
+        var bgTexture = loader.load('./image/fondo.jpeg');
+        scene.background = bgTexture;
+
+        // Espacio para colocar los objetos
+
+        //LUCES
+        var light1 = new THREE.AmbientLight(0xffffff, 1);
+        light1.position.set(-70, 70, 70);
+        scene.add(light1);
+
+        // Objetos 
+
+        // Plano
+        var Caja = new THREE.BoxGeometry(4000, 6, 2000, 5, 5, 5);
+        var texture1 = new THREE.TextureLoader().load("./image/nieve.jpg");
+        var material1 = new THREE.MeshLambertMaterial({ map: texture1, side: THREE.DoubleSide })
+        var mesh1 = new THREE.Mesh(Caja, material1);
+        scene.add(mesh1);
+        mesh1.position.set(0, 0, 3);
+
+        //Taller
+
+        //PARED1 DER
+        var Caja = new THREE.BoxGeometry(10, 400, 482, 50, 50, 50);
+        var material2 = new THREE.MeshLambertMaterial({
+            color: 0xC20404, side: THREE.DoubleSide
+        });
+        var mesh2 = new THREE.Mesh(Caja, material2);
+        scene.add(mesh2);
+        mesh2.position.set(693, 199, -758);
+
+        //PARED2 IZ
+        var Caja = new THREE.BoxGeometry(10, 400, 482, 50, 50, 50);
+        var material3 = new THREE.MeshLambertMaterial({
+            color: 0xC20404, side: THREE.DoubleSide
+        });
+        var mesh3 = new THREE.Mesh(Caja, material3);
+        scene.add(mesh3);
+        mesh3.position.set(-693, 199, -757);
+
+        // PARED DE ENFRENTE DER
+        var Caja = new THREE.BoxGeometry(520, 400, 1, 50, 50, 50);
+        var material04 = new THREE.MeshLambertMaterial({
+            color: 0xC20404, side: THREE.DoubleSide
+        });
+        var mesh04 = new THREE.Mesh(Caja, material04);
+        scene.add(mesh04);
+        mesh04.position.set(-430, 200, -517);
+
+         // PARED DE ENFRENTE IZ
+        var Caja = new THREE.BoxGeometry(520, 400, 0, 50, 50, 50);
+        var material05 = new THREE.MeshLambertMaterial({
+            color: 0xC20404, side: THREE.DoubleSide
+        });
+        var mesh05 = new THREE.Mesh(Caja, material05);
+        scene.add(mesh05);
+        mesh05.position.set(430, 200, -517);
+
+        //PARED TRACERA
+        var plano = new THREE.PlaneGeometry(1400, 400, 10, 10);
+        var material5 = new THREE.MeshLambertMaterial({
+            color: 0xC20404, side: THREE.DoubleSide
+        });
+        var mesh5 = new THREE.Mesh(plano, material5);
+        scene.add(mesh5);
+        mesh5.position.set(0, 200, -999);
+
+        //techo
+        var plano = new THREE.PlaneGeometry(1400, 486, 10, 10);
+        var material6 = new THREE.MeshLambertMaterial({
+            color: 0x211200, side: THREE.DoubleSide
+        });
+        var mesh6 = new THREE.Mesh(plano, material6);
+        scene.add(mesh6);
+        mesh6.position.set(0, 400, -757);
+        mesh6.rotation.set(-1.57, 0, 0);
+
+        //PISO
+        var Caja = new THREE.BoxGeometry(482, 10, 472, 50, 50, 50);
+        var texture7= new THREE.TextureLoader().load("./image/piso.jpg");
+        var material7 =new THREE .MeshLambertMaterial({map:texture7,side:THREE.DoubleSide})
+        var mesh7 = new THREE.Mesh(Caja, material7);
+        scene.add(mesh7);
+        mesh7.position.set(58, 9, -757);
+
+        var Caja = new THREE.BoxGeometry(505, 10, 472, 50, 50, 50);
+        var texture8= new THREE.TextureLoader().load("./image/piso.jpg");
+        var material8 =new THREE .MeshLambertMaterial({map:texture8,side:THREE.DoubleSide})
+        var mesh8 = new THREE.Mesh(Caja, material8);
+        scene.add(mesh8);
+        mesh8.position.set(-435, 9, -757);
+
+        var Caja = new THREE.BoxGeometry(390, 10, 472, 50, 50, 50);
+        var texture9= new THREE.TextureLoader().load("./image/piso.jpg");
+        var material9 =new THREE .MeshLambertMaterial({map:texture9,side:THREE.DoubleSide})
+        var mesh9 = new THREE.Mesh(Caja, material9);
+        scene.add(mesh9);
+        mesh9.position.set(494, 9, -757);
+
+        //CUARTOS
+         
+        //PARED 1.1 DER
+        //PARTE SUPERIOR
+        var Caja = new THREE.BoxGeometry(10, 200, 469, 40, 50, 50);
+        var material10 = new THREE.MeshLambertMaterial({
+            color: 0x032100, side: THREE.DoubleSide
+        });
+        var mesh10= new THREE.Mesh(Caja, material10);
+        scene.add(mesh10);
+        mesh10.position.set(293, 300, -758);
+
+        // LADOS IZQ
+        var Caja = new THREE.BoxGeometry(10, 270, 100, 40, 50, 50);
+        var material11 = new THREE.MeshLambertMaterial({
+            color: 0x032100, side: THREE.DoubleSide
+        });
+        var mesh11= new THREE.Mesh(Caja, material11);
+        scene.add(mesh11);
+        mesh11.position.set(294.5, 134, -570);
+
+         // LADO DER
+        var Caja = new THREE.BoxGeometry(10, 270, 100, 40, 50, 50);
+        var material12 = new THREE.MeshLambertMaterial({
+            color: 0x032100, side: THREE.DoubleSide
+        });
+        var mesh12= new THREE.Mesh(Caja, material12);
+        scene.add(mesh12);
+        mesh12.position.set(293, 134, -942);
+     
+        //EN MEDIO
+        var Caja = new THREE.BoxGeometry(400, 393, 42, 50, 50, 50);
+        var material14= new THREE.MeshLambertMaterial({
+            color: 0x032100, side: THREE.DoubleSide
+        });
+        var mesh14= new THREE.Mesh(Caja, material14);
+        scene.add(mesh14);
+        mesh14.position.set(493, 205, -758);
+
+        //PARED 2.1 IZQ
+         //PARTE SUPERIOR
+        var Caja = new THREE.BoxGeometry(10, 200, 470, 50, 50, 50);
+        var material15 = new THREE.MeshLambertMaterial({
+            color: 0x032100, side: THREE.DoubleSide
+        });
+        var mesh15= new THREE.Mesh(Caja, material15);
+        scene.add(mesh15);
+        mesh15.position.set(-293, 300, -758);
+
+        // LADOS IZQ
+        var Caja = new THREE.BoxGeometry(10, 270, 100, 50, 50, 50);
+        var material16 = new THREE.MeshLambertMaterial({
+            color: 0x032100, side: THREE.DoubleSide
+        });
+        var mesh16= new THREE.Mesh(Caja, material16);
+        scene.add(mesh16);
+        mesh16.position.set(-293, 134, -570);
+
+         // LADOS DER
+          var Caja = new THREE.BoxGeometry(10, 270, 100, 50, 50, 50);
+        var material17 = new THREE.MeshLambertMaterial({
+            color: 0x032100, side: THREE.DoubleSide
+        });
+        var mesh17= new THREE.Mesh(Caja, material17);
+        scene.add(mesh17);
+        mesh17.position.set(-293, 134, -942);
+        //EN MEDIO
+        var Caja = new THREE.BoxGeometry(400, 382, 42, 50, 50, 50);
+        var material18 = new THREE.MeshLambertMaterial({
+            color: 0x032100, side: THREE.DoubleSide
+        });
+        var mesh18= new THREE.Mesh(Caja, material18);
+        scene.add(mesh18);
+        mesh18.position.set(-493, 205, -758);
+
+        //puerta
+        var Caja = new THREE.BoxGeometry(250, 320, 30, 50, 50, 50);
+        var texture19= new THREE.TextureLoader().load("./image/puerta.png");
+        var material19 =new THREE .MeshLambertMaterial({map:texture19,side:THREE.DoubleSide})
+        var mesh19 = new THREE.Mesh(Caja, material19);
+        scene.add(mesh19);
+        mesh19.position.set(0, 160, -210);
+
+        //Ventana
+
+        var Caja = new THREE.BoxGeometry(80, 80, 6, 15, 15, 15);
+        var texture20= new THREE.TextureLoader().load("./image/ventana.jpg");
+        var material20 =new THREE .MeshLambertMaterial({map:texture20,side:THREE.DoubleSide})
+        var mesh20 = new THREE.Mesh(Caja, material20);
+         //scene.add(mesh20);
+        mesh20.position.set(-360, 150, -515);
+
+        var Caja = new THREE.BoxGeometry(80, 80, 6, 15, 15, 15);
+        var texture21= new THREE.TextureLoader().load("./image/ventana.jpg");
+        var material21 =new THREE .MeshLambertMaterial({map:texture21,side:THREE.DoubleSide})
+        var mesh21 = new THREE.Mesh(Caja, material21);
+         //scene.add(mesh21);
+        mesh21.position.set(-450, 150, -515);
+
+         var Caja = new THREE.BoxGeometry(80, 80, 6, 15, 15, 15);
+        var texture22= new THREE.TextureLoader().load("./image/ventana.jpg");
+        var material22=new THREE .MeshLambertMaterial({map:texture22,side:THREE.DoubleSide})
+        var mesh22 = new THREE.Mesh(Caja, material22);
+         //scene.add(mesh22);
+        mesh22.position.set(-550, 150, -515);
+
+        var Caja = new THREE.BoxGeometry(80, 80, 6, 15, 15, 15);
+        var texture23= new THREE.TextureLoader().load("./image/ventana.jpg");
+        var material23=new THREE .MeshLambertMaterial({map:texture23,side:THREE.DoubleSide})
+        var mesh23 = new THREE.Mesh(Caja, material23);
+         //scene.add(mesh23);
+        mesh23.position.set(-550, 240, -515);
+
+        var Caja = new THREE.BoxGeometry(80, 80, 6, 15, 15, 15);
+        var texture24= new THREE.TextureLoader().load("./image/ventana.jpg");
+        var material24=new THREE .MeshLambertMaterial({map:texture24,side:THREE.DoubleSide})
+        var mesh24 = new THREE.Mesh(Caja, material24);
+         //scene.add(mesh24);
+        mesh24.position.set(-454, 240, -515);
+
+        var Caja = new THREE.BoxGeometry(80, 80, 6, 15, 15, 15);
+        var texture25= new THREE.TextureLoader().load("./image/ventana.jpg");
+        var material25=new THREE .MeshLambertMaterial({map:texture25,side:THREE.DoubleSide})
+        var mesh25 = new THREE.Mesh(Caja, material25);
+         //scene.add(mesh25);
+        mesh25.position.set(-362, 240, -515);
+
+        var Caja = new THREE.BoxGeometry(280, 20, 20, 15, 15, 15);
+        var texture26= new THREE.TextureLoader().load("./image/madera.jpg");
+        var material26=new THREE .MeshLambertMaterial({map:texture26,side:THREE.DoubleSide})
+        var mesh26 = new THREE.Mesh(Caja, material26);
+         //scene.add(mesh26);
+        mesh26.position.set(-450, 100, -515);
+
+        var Caja = new THREE.BoxGeometry(270, 20, 15, 15, 15, 15);
+        var texture27= new THREE.TextureLoader().load("./image/madera.jpg");
+        var material27=new THREE .MeshLambertMaterial({map:texture27,side:THREE.DoubleSide})
+        var mesh27 = new THREE.Mesh(Caja, material27);
+         //scene.add(mesh27);
+        mesh27.position.set(-457, 190, -515);
+
+        var Caja = new THREE.BoxGeometry(280, 20, 40, 15, 15, 15);
+        var texture28= new THREE.TextureLoader().load("./image/madera.jpg");
+        var material28=new THREE .MeshLambertMaterial({map:texture28,side:THREE.DoubleSide})
+        var mesh28 = new THREE.Mesh(Caja, material28);
+         //scene.add(mesh28);
+        mesh28.position.set(-450, 270, -500);
+
+        var Caja = new THREE.BoxGeometry(20, 193, 20, 15, 15, 15);
+        var texture29= new THREE.TextureLoader().load("./image/madera.jpg");
+        var material29=new THREE .MeshLambertMaterial({map:texture29,side:THREE.DoubleSide})
+        var mesh29 = new THREE.Mesh(Caja, material29);
+         //scene.add(mesh29);
+        mesh29.position.set(-311, 187, -510);
+
+        var Caja = new THREE.BoxGeometry(20, 193, 20, 15, 15, 15);
+        var texture30= new THREE.TextureLoader().load("./image/madera.jpg");
+        var material30=new THREE .MeshLambertMaterial({map:texture30,side:THREE.DoubleSide})
+        var mesh30= new THREE.Mesh(Caja, material30);
+         //scene.add(mesh30);
+        mesh30.position.set(-600, 187, -510);
+
+        var Caja = new THREE.BoxGeometry(20, 160, 4, 15, 15, 15);
+        var texture31= new THREE.TextureLoader().load("./image/madera.jpg");
+        var material31=new THREE .MeshLambertMaterial({map:texture31,side:THREE.DoubleSide})
+        var mesh31 = new THREE.Mesh(Caja, material31);
+         //scene.add(mesh31);
+        mesh31.position.set(-410, 180, -510);
+
+        var Caja = new THREE.BoxGeometry(20, 160, 4, 15, 15, 15);
+        var texture32= new THREE.TextureLoader().load("./image/madera.jpg");
+        var material32=new THREE .MeshLambertMaterial({map:texture32,side:THREE.DoubleSide})
+        var mesh32 = new THREE.Mesh(Caja, material32);
+       //sene.add(mesh32);
+        mesh32.position.set(-500, 180, -510);
+
+        var ven= new THREE.Group();
+        ven.add(mesh20, mesh21, mesh22, mesh23, mesh24, mesh25, mesh26,mesh27, mesh28, mesh29, mesh30, mesh31, mesh32);
+        scene.add(ven);
+        ven.position.set(0,35,0);
+
+        //Ventana clonada
+        var ven2 = ven.clone();
+        scene.add(ven2);
+        ven2.position.set(940, 30, -2);
+
+        //PASILLO
+        var Caja = new THREE.BoxGeometry(10, 400, 300, 50, 50, 50);
+        var material33 = new THREE.MeshLambertMaterial({
+            color: 0xC20404, side: THREE.DoubleSide
+        });
+        var mesh33 = new THREE.Mesh(Caja, material33);
+        scene.add(mesh33);
+        mesh33.position.set(170, 200, -370);
+
+        var Caja = new THREE.BoxGeometry(10, 400, 300, 50, 50, 50);
+        var material33 = new THREE.MeshLambertMaterial({
+            color: 0xC20404, side: THREE.DoubleSide
+        });
+        var mesh33 = new THREE.Mesh(Caja, material33);
+        scene.add(mesh33);
+        mesh33.position.set(-170, 200, -370);
+
+        var Caja = new THREE.BoxGeometry(335, 400, 10, 50, 50, 50);
+        var material33 = new THREE.MeshLambertMaterial({
+            color: 0xC20404, side: THREE.DoubleSide
+        });
+        var mesh33 = new THREE.Mesh(Caja, material33);
+        scene.add(mesh33);
+        mesh33.position.set(1, 200, -215);
+
+        // Cilindro
+      var cilindro = new THREE.CylinderGeometry(240, 240, 10, 50, 50, false, 0, 6.28);
+      var material45 = new THREE.MeshLambertMaterial({
+       color: 0x211200, side: THREE.DoubleSide
+      });
+       var mesh45 = new THREE.Mesh(cilindro, material45);
+      scene.add(mesh45);
+        mesh45.position.set(-15, 400, -340);
+
+      //TECHITO
+     var cono = new THREE.ConeGeometry(240, 234, 90, 90, 90, 0, 6.28);
+      var texture34= new THREE.TextureLoader().load("./image/techo.jpg");
+    var material34 =new THREE .MeshLambertMaterial({map:texture34,side:THREE.DoubleSide})
+    var mesh34 = new THREE.Mesh(cono, material34);
+    scene.add(mesh34);
+     mesh34.position.set(-13, 520, -350);
+
+       //PISO DEL PASILLO
+    var Caja = new THREE.BoxGeometry(340, 10, 330, 50, 50, 50);
+    var texture35= new THREE.TextureLoader().load("./image/piso.jpg");
+    var material35 =new THREE .MeshLambertMaterial({map:texture35,side:THREE.DoubleSide})
+    var mesh35 = new THREE.Mesh(Caja, material35);
+    scene.add(mesh35);
+     mesh35.position.set(0, 10, -400);
+
+    //TECHO DEL PASILLO
+     var Caja = new THREE.BoxGeometry(320, 10, 270, 50, 50, 505);
+    var material36 = new THREE.MeshLambertMaterial({
+    color: 0x211200, side: THREE.DoubleSide
+    });
+    var mesh36 = new THREE.Mesh(Caja, material36);
+    scene.add(mesh36);
+    mesh36.position.set(0, 400, -380);
+
+    var plano = new THREE.PlaneGeometry(1400, 400, 10, 10);
+    var texture37= new THREE.TextureLoader().load("./image/techo.jpg");
+    var material37 =new THREE .MeshLambertMaterial({map:texture37,side:THREE.DoubleSide})
+    var mesh37 = new THREE.Mesh(plano, material37);
+        scene.add(mesh37);
+        mesh37.position.set(0, 558, -870);
+         mesh37.rotation.set(3.8,0,0);
+
+         var plano = new THREE.PlaneGeometry(1400, 400, 10, 10);
+        var material38 = new THREE.MeshLambertMaterial({
+            color: 0x211200, side: THREE.DoubleSide
+        });
+        var mesh38 = new THREE.Mesh(plano, material37);
+        scene.add(mesh38);
+        mesh38.position.set(0, 558, -630);
+         mesh38.rotation.set(2.5,0,0);
+
+
+         // ESTRUCTURAS DE AFUERA
+    var cilindro = new THREE.CylinderGeometry(140, 140, 860, 30, 30, false, 0, 6.28);
+    var material38 = new THREE.MeshBasicMaterial({
+    color: 0xC20404, side: THREE.DoubleSide
+     });
+     var mesh38 = new THREE.Mesh(cilindro, material38);
+    scene.add(mesh38);
+     mesh38.position.set(-830, 430, -700);
+
+     var cilindro = new THREE.CylinderGeometry(140, 140, 860, 30, 30, false, 0, 6.28);
+    var material38 = new THREE.MeshBasicMaterial({
+    color: 0xC20404, side: THREE.DoubleSide
+     });
+     var mesh38 = new THREE.Mesh(cilindro, material38);
+    scene.add(mesh38);
+     mesh38.position.set(830, 430, -700);
+
+      var cono = new THREE.ConeGeometry(200, 234, 90, 90, 90, 0, 6.28);
+     var texture39= new THREE.TextureLoader().load("./image/techo.jpg");
+    var material39 =new THREE .MeshLambertMaterial({map:texture39,side:THREE.DoubleSide})
+    var mesh39 = new THREE.Mesh(cono, material39);
+    scene.add(mesh39);
+     mesh39.position.set(-830, 930, -690);
+
+      var cilindro = new THREE.CylinderGeometry(200, 200, 16, 50, 50, false, 0, 6.28);
+      var material45 = new THREE.MeshLambertMaterial({
+       color: 0x211200, side: THREE.DoubleSide
+      });
+       var mesh45 = new THREE.Mesh(cilindro, material45);
+      scene.add(mesh45);
+        mesh45.position.set(-830, 805, -690);
+
+    var cilindro = new THREE.CylinderGeometry(200, 200, 16, 50, 50, false, 0, 6.28);
+      var material45 = new THREE.MeshLambertMaterial({
+       color: 0x211200, side: THREE.DoubleSide
+      });
+       var mesh45 = new THREE.Mesh(cilindro, material45);
+      scene.add(mesh45);
+        mesh45.position.set(830, 805, -690);
+
+      var cono = new THREE.ConeGeometry(200, 234, 90, 90, 90, 0, 6.28);
+      var texture40= new THREE.TextureLoader().load("./image/techo.jpg");
+    var material40 =new THREE .MeshLambertMaterial({map:texture40,side:THREE.DoubleSide})
+    var mesh40 = new THREE.Mesh(cono, material40);
+    scene.add(mesh40);
+    scene.add(mesh40);
+     mesh40.position.set(830, 930, -690);
+
+    //al fombras de afuera
+    var Caja = new THREE.BoxGeometry(300, 10, 1210, 50, 50, 50);
+    var material41 = new THREE.MeshLambertMaterial({
+            color: 0x520707, side: THREE.DoubleSide
+    });
+    var mesh41 = new THREE.Mesh(Caja, material41);
+    scene.add(mesh41);
+     mesh41.position.set(1, 4, 400);
+
+// postes
+var cilindro = new THREE.CylinderGeometry(10, 10, 400, 30, 30, false, 0, 6.28);
+var texture42= new THREE.TextureLoader().load("./image/poste.jpg");
+    var material42 =new THREE .MeshLambertMaterial({map:texture42,side:THREE.DoubleSide})
+    var mesh42 = new THREE.Mesh(cilindro, material42);
+scene.add(mesh42);
+mesh42.position.set(-130,210, 990);
+
+ // Postes
+var cilindro = new THREE.CylinderGeometry(10, 10, 400, 30, 30, false, 0, 6.28);
+var texture43= new THREE.TextureLoader().load("./image/poste.jpg");
+    var material43 =new THREE .MeshLambertMaterial({map:texture43,side:THREE.DoubleSide})
+    var mesh43 = new THREE.Mesh(cilindro, material43);
+scene.add(mesh43);
+mesh43.position.set(130,210, 990);
+
+//cartel
+var caja = new THREE.BoxGeometry(320, 80, 20, 50, 50, 50);
+var texture44 = new THREE.TextureLoader().load("./image/cartel.jpg");
+var material44 = new THREE.MeshLambertMaterial({map: texture44, side: THREE.DoubleSide});
+var mesh44 = new THREE.Mesh(caja, material44);
+scene.add(mesh44);
+mesh44.position.set(0, 340, 1000);
+
+ //TEXTO
+ var loader =new FontLoader();
+ 
+ var font = loader.parse(fontJSON);
+ var geometry1 = new TextGeometry('Bienvenidos',{
+    font: font,
+    size: 40,
+    height:2,
+ 
+ });
+ geometry1.center();
+ 
+ var materialT =new THREE.MeshLambertMaterial({
+    color:0xEB0707,
+    emissive:0x9c0e1c,
+    shading:THREE.FlatShading,
+ });
+ 
+var texto  = new THREE.Mesh(geometry1,materialT);
+scene.add(texto);
+texto.position.set(0,340,1020,2);
+texto.castShadow = true;
+texto.receiveShadow = true;
+
+//Adentro del Taller
+  // Alfombra
+      var cilindro = new THREE.CylinderGeometry(140, 140, 3, 50, 50, false, 0, 6.28);
+      var texture46 = new THREE.TextureLoader().load("./image/alfom.png");
+     var material46 = new THREE.MeshLambertMaterial({map: texture46, side: THREE.DoubleSide});
+    var mesh46 = new THREE.Mesh(cilindro, material46);
+      scene.add(mesh46);
+        mesh46.position.set(-15, 15, -710);
+
+ // Chimenea
+var Caja = new THREE.BoxGeometry(90, 690, 100, 15, 15, 15);
+  var texture47 = new THREE.TextureLoader().load("./image/chimenea.jpg");
+     var material47 = new THREE.MeshLambertMaterial({map: texture47, side: THREE.DoubleSide});
+    var mesh47 = new THREE.Mesh(Caja, material47);
+scene.add(mesh47);
+mesh47.position.set(640, 560, -910);
+
+var Caja = new THREE.BoxGeometry(94, 90, 160, 15, 15, 15);
+var material48 = new THREE.MeshLambertMaterial({
+    color: 0xC9C1C1, side: THREE.DoubleSide
+});
+var mesh48 = new THREE.Mesh(Caja, material48);
+scene.add(mesh48);
+mesh48.position.set(640, 199, -910);
+
+var Caja = new THREE.BoxGeometry(70, 230, 20, 15, 15, 15);
+var texture49 = new THREE.TextureLoader().load("./image/chimenea.jpg");
+     var material49 = new THREE.MeshLambertMaterial({map: texture49, side: THREE.DoubleSide});
+    var mesh49 = new THREE.Mesh(Caja, material49);
+scene.add(mesh49);
+mesh49.position.set(640, 120, -970);
+
+var Caja = new THREE.BoxGeometry(70, 230, 20, 15, 15, 15);
+var texture50 = new THREE.TextureLoader().load("./image/chimenea.jpg");
+     var material50 = new THREE.MeshLambertMaterial({map: texture50, side: THREE.DoubleSide});
+    var mesh50 = new THREE.Mesh(Caja, material50);
+scene.add(mesh50);
+mesh50.position.set(640, 120, -840);
+
+var Caja = new THREE.BoxGeometry(95, 90, 140, 15, 15, 15);
+var material51 = new THREE.MeshLambertMaterial({
+    color: 0xC9C1C1, side: THREE.DoubleSide
+});
+var mesh51 = new THREE.Mesh(Caja, material51);
+scene.add(mesh51);
+mesh51.position.set(640, 865, -910);
+
+var Caja = new THREE.BoxGeometry(30, 150, 150, 15, 15, 15);
+var texture52 = new THREE.TextureLoader().load("./image/fogata.jpg");
+     var material52 = new THREE.MeshLambertMaterial({map: texture52, side: THREE.DoubleSide});
+    var mesh52 = new THREE.Mesh(Caja, material52);
+scene.add(mesh52);
+mesh52.position.set(640, 80, -900);
+
+//CUADROS
+var Caja = new THREE.BoxGeometry(10, 150, 150, 15, 15, 15);
+var texture53 = new THREE.TextureLoader().load("./image/cuadro1.jpg");
+     var material53 = new THREE.MeshLambertMaterial({map: texture53, side: THREE.DoubleSide});
+    var mesh53 = new THREE.Mesh(Caja, material53);
+scene.add(mesh53);
+mesh53.position.set(166, 200, -400);
+
+var Caja = new THREE.BoxGeometry(10, 150, 150, 15, 15, 15);
+var texture54 = new THREE.TextureLoader().load("./image/cuadro2.jpg");
+     var material54= new THREE.MeshLambertMaterial({map: texture54, side: THREE.DoubleSide});
+    var mesh54 = new THREE.Mesh(Caja, material54);
+scene.add(mesh54);
+mesh54.position.set(-166, 200, -400);
+
+
+var Caja = new THREE.BoxGeometry(14, 155, 15, 15, 15, 15);
+var material55 = new THREE.MeshLambertMaterial({
+    color: 0xA67005, side: THREE.DoubleSide
+});
+var mesh55 = new THREE.Mesh(Caja, material55);
+scene.add(mesh55);
+mesh55.position.set(166, 200, -332);
+
+var Caja = new THREE.BoxGeometry(14, 155, 15, 15, 15, 15);
+var material56 = new THREE.MeshLambertMaterial({
+    color: 0xA67005, side: THREE.DoubleSide
+});
+var mesh56 = new THREE.Mesh(Caja, material56);
+scene.add(mesh56);
+mesh56.position.set(166, 200, -469);
+
+var Caja = new THREE.BoxGeometry(14, 15, 152, 15, 15, 15);
+var material57 = new THREE.MeshLambertMaterial({
+    color: 0xA67005, side: THREE.DoubleSide
+});
+var mesh57 = new THREE.Mesh(Caja, material57);
+scene.add(mesh57);
+mesh57.position.set(166, 280, -400);
+
+
+var Caja = new THREE.BoxGeometry(14, 15, 152, 15, 15, 15);
+var material58 = new THREE.MeshLambertMaterial({
+    color: 0xA67005, side: THREE.DoubleSide
+});
+var mesh58 = new THREE.Mesh(Caja, material58);
+scene.add(mesh58);
+mesh58.position.set(166, 130, -400);
+
+
+var Caja = new THREE.BoxGeometry(14, 155, 15, 15, 15, 15);
+var material59 = new THREE.MeshLambertMaterial({
+    color: 0xA67005, side: THREE.DoubleSide
+});
+var mesh59 = new THREE.Mesh(Caja, material59);
+scene.add(mesh59);
+mesh59.position.set(-166, 200, -332);
+
+var Caja = new THREE.BoxGeometry(14, 155, 15, 15, 15, 15);
+var material60 = new THREE.MeshLambertMaterial({
+    color: 0xA67005, side: THREE.DoubleSide
+});
+var mesh60 = new THREE.Mesh(Caja, material60);
+scene.add(mesh60);
+mesh60.position.set(-166, 200, -469);
+
+var Caja = new THREE.BoxGeometry(14, 15, 152, 15, 15, 15);
+var material61 = new THREE.MeshLambertMaterial({
+    color: 0xA67005, side: THREE.DoubleSide
+});
+var mesh61 = new THREE.Mesh(Caja, material61);
+scene.add(mesh61);
+mesh61.position.set(-166, 280, -400);
+
+var Caja = new THREE.BoxGeometry(14, 15, 152, 15, 15, 15);
+var material62 = new THREE.MeshLambertMaterial({
+    color: 0xA67005, side: THREE.DoubleSide
+});
+var mesh62 = new THREE.Mesh(Caja, material62);
+scene.add(mesh62);
+mesh62.position.set(-166, 130, -400);
+
+//Humo
+var esfera = new THREE.SphereGeometry(120, 30, 30);
+var material63 = new THREE.MeshLambertMaterial({
+    color: 0xB3AEAD, side: THREE.DoubleSide
+});
+var mesh63 = new THREE.Mesh(esfera, material63);
+scene.add(mesh63);
+mesh63.position.set(640, 960, -909);
+
+var esfera = new THREE.SphereGeometry(80, 30, 30);
+var material64 = new THREE.MeshLambertMaterial({
+    color: 0xB3AEAD, side: THREE.DoubleSide
+});
+var mesh64 = new THREE.Mesh(esfera, material64);
+scene.add(mesh64);
+mesh64.position.set(690, 990, -800);
+
+var esfera = new THREE.SphereGeometry(80, 30, 30);
+var material64 = new THREE.MeshLambertMaterial({
+    color: 0xB3AEAD, side: THREE.DoubleSide
+});
+var mesh64 = new THREE.Mesh(esfera, material64);
+scene.add(mesh64);
+mesh64.position.set(690, 1050, -870);
+
+var esfera = new THREE.SphereGeometry(80, 30, 30);
+var material64 = new THREE.MeshLambertMaterial({
+    color: 0xB3AEAD, side: THREE.DoubleSide
+});
+var mesh64 = new THREE.Mesh(esfera, material64);
+scene.add(mesh64);
+mesh64.position.set(600, 1050, -870);
+
+var esfera = new THREE.SphereGeometry(80, 30, 30);
+var material64 = new THREE.MeshLambertMaterial({
+    color: 0xB3AEAD, side: THREE.DoubleSide
+});
+var mesh64 = new THREE.Mesh(esfera, material64);
+scene.add(mesh64);
+mesh64.position.set(600, 1090, -870);
+
+var esfera = new THREE.SphereGeometry(60, 30, 30);
+var material64 = new THREE.MeshLambertMaterial({
+    color: 0xB3AEAD, side: THREE.DoubleSide
+});
+var mesh64 = new THREE.Mesh(esfera, material64);
+scene.add(mesh64);
+mesh64.position.set(600, 1190, -870);
+
+//mapa
+var Caja = new THREE.BoxGeometry(150, 150, 4, 15, 15, 15);
+var texture65 = new THREE.TextureLoader().load("./image/mapa.png");
+     var material65 = new THREE.MeshLambertMaterial({map: texture65, side: THREE.DoubleSide});
+    var mesh65 = new THREE.Mesh(Caja, material65);
+scene.add(mesh65);
+mesh65.position.set(470, 170, -800);
+
+var Caja = new THREE.BoxGeometry(150, 15, 8, 15, 15, 15);
+var material66 = new THREE.MeshLambertMaterial({
+       color: 0x963908, side: THREE.DoubleSide
+      });
+       var mesh66= new THREE.Mesh(Caja, material66);
+scene.add(mesh66);
+mesh66.position.set(470, 250, -800);
+
+var Caja = new THREE.BoxGeometry(150, 15, 8, 15, 15, 15);
+var material67 = new THREE.MeshLambertMaterial({
+       color: 0x963908, side: THREE.DoubleSide
+      });
+       var mesh67= new THREE.Mesh(Caja, material67);
+scene.add(mesh67);
+mesh67.position.set(470, 100, -800);
+
+var Caja = new THREE.BoxGeometry(15, 163, 8, 15, 15, 15);
+var material68 = new THREE.MeshLambertMaterial({
+       color: 0x963908, side: THREE.DoubleSide
+      });
+       var mesh68= new THREE.Mesh(Caja, material68);
+scene.add(mesh68);
+mesh68.position.set(400, 174, -800);
+
+var Caja = new THREE.BoxGeometry(15, 163, 8, 15, 15, 15);
+var material68 = new THREE.MeshLambertMaterial({
+       color: 0x963908, side: THREE.DoubleSide
+      });
+       var mesh68= new THREE.Mesh(Caja, material68);
+scene.add(mesh68);
+mesh68.position.set(540, 174, -800);
+
+
+//Cosas importadas
+var ob1 = arbol({x:0,y: 0,z:0});
+scene.add(ob1);
+ob1.position.set(1450,-17, 700);
+ob1.scale.set(11.5,11.5,11.5,11.5); 
+
+var ar2 = ob1.clone();
+scene.add(ar2);
+ar2.position.set(-900,-14,900);
+
+var ar3 = ob1.clone();
+scene.add(ar3);
+ar3.position.set(1990,-14,400);
+
+var ar4 = ob1.clone();
+scene.add(ar4);
+ar4.position.set(-500,-30,600);
+
+var ar5 = ob1.clone();
+scene.add(ar5);
+ar5.position.set(1990,-30,1000);
+
+var ar6 = ob1.clone();
+scene.add(ar6);
+ar6.position.set(2400,-30,2);
+
+var ar7 = ob1.clone();
+scene.add(ar7);
+ar7.position.set(-500,-30,2);
+
+var ar8 = ob1.clone();
+scene.add(ar8);
+ar8.position.set(-1000,-30,200);
+
+var ar9 = ob1.clone();
+scene.add(ar9);
+ar9.position.set(1500,-30,1400);
+
+var ar10 = ob1.clone();
+scene.add(ar10);
+ar10.position.set(-500,-30,1400);
+
+var ar11 = ob1.clone();
+scene.add(ar11);
+ar11.position.set(60,-30,1400);
+
+var ar12 = ob1.clone();
+scene.add(ar12);
+ar12.position.set(2300,-30,1400);
+
+//arbol de adentro
+var ob1 = arbolito({x:0,y: 0,z:0});
+scene.add(ob1);
+ob1.position.set(260,7, -450);
+ob1.scale.set(4.6,4.6,4.6,4.6); 
+
+//Cartel1
+var ob1 = cartel1({x:0,y: 0,z:0});
+scene.add(ob1);
+ob1.position.set(280,230, -860);
+ob1.scale.set(0.4,0.4,0.4,0.4); 
+
+//Cartel2
+var ob1 = cartel2({x:0,y: 0,z:0});
+scene.add(ob1);
+ob1.position.set(280,230, -700);
+ob1.scale.set(0.4,0.4,0.4,0.4); 
+
+//Cartel3
+var ob1 = cartel3({x:0,y: 0,z:0});
+scene.add(ob1);
+ob1.position.set(-280,230, -700);
+ob1.scale.set(0.4,0.4,0.4,0.4);
+
+//Cartel4
+var ob1 = cartel4({x:0,y: 0,z:0});
+scene.add(ob1);
+ob1.position.set(-280,230, -860);
+ob1.scale.set(0.4,0.4,0.4,0.4);
+
+//reno
+var ob2 = reno({x:0,y: 0,z:0});
+scene.add(ob2);
+ob2.position.set(490,10, -630);
+ob2.scale.set(2.5,2.5,2.5);
+ob2.rotation.set(0,-2.5,0);
+//reno2
+var ob3 = reno2({x:0,y: 0,z:0});
+scene.add(ob3);
+ob3.position.set(400,10, -590);
+ob3.scale.set(2.5,2.5,2.5);
+ob3.rotation.set(0,-1.57,0);
+//reno3
+var re3 = ob3.clone();
+scene.add(re3);
+re3.position.set(600,14,-650);
+re3.rotation.set(0,-1,0);
+
+//Asiento
+var ob4 = asiento({x:0,y: 0,z:0});
+scene.add(ob4);
+ob4.position.set(450,10, -990);
+ob4.scale.set(3.3,3.3,3.3,3.3);
+//Fabrica
+var ob5 = fabrica({x:0,y: 0,z:0});
+scene.add(ob5);
+ob5.position.set(-500,15, -950);
+ob5.scale.set(2.6,2.6,2.6,2.6);
+ob5.rotation.set(0,3.1,0);
+//regalo1
+var ob6 = regalo({x:0,y: 0,z:0});
+scene.add(ob6);
+ob6.position.set(-460,71, -980);
+ob6.scale.set(1.4,1.4,1.4,1.4);
+//regalo2
+var ob6 = reg4({x:0,y: 0,z:0});
+scene.add(ob6);
+ob6.position.set(-420,71, -980);
+ob6.scale.set(1.4,1.4,1.4,1.4);
+//regalo3
+var ob6 = reg5({x:0,y: 0,z:0});
+scene.add(ob6);
+ob6.position.set(-330,14, -1030);
+ob6.scale.set(1.4,1.4,1.4,1.4);
+//tren
+var ob7 = tren({x:0,y: 0,z:0});
+scene.add(ob7);
+ob7.position.set(-550,74, -910);
+ob7.scale.set(1.2,1.2,1.2,1.2);
+//tren2
+var ob7 = tren2({x:0,y: 0,z:0});
+scene.add(ob7);
+ob7.position.set(-600,74, -910);
+ob7.scale.set(1.2,1.2,1.2,1.2);
+ob7.rotation.set(0,0, 0);
+//mosaico
+var ob8= mosaico({x:0,y: 0,z:0});
+scene.add(ob8);
+ob8.position.set(-700,100, -636);
+ob8.scale.set(15.2,15.2,15.2,15.2);
+ob8.rotation.set(0,0, 0);
+//corona
+var ob9 = corona({x:0,y: 0,z:0});
+scene.add(ob9);
+ob9.position.set(270,230, -790);
+ob9.scale.set(2.1,2.1,2.1,2.1);
+ob9.rotation.set(0,4.6, 0);
+//campana
+var ob10 = campana({x:0,y: 0,z:0});
+scene.add(ob10);
+ob10.position.set(270,270, -940);
+ob10.scale.set(2.1,2.1,2.1,2.1);
+ob10.rotation.set(0,4.8, 0);
+
+var ob10 = campana({x:0,y: 0,z:0});
+scene.add(ob10);
+ob10.position.set(270,270, -640);
+ob10.scale.set(2.1,2.1,2.1,2.1);
+ob10.rotation.set(0,4.8, 0);
+
+//mosaico
+var ob8= mosaico2({x:0,y: 0,z:0});
+scene.add(ob8);
+ob8.position.set(-250,60, -780);
+ob8.scale.set(21.2,21.2,21.2,21.2);
+ob8.rotation.set(0,0, 0);
+
+//trineo
+var ob9= trineo({x:0,y: 0,z:0});
+scene.add(ob9);
+ob9.position.set(450,0, 400);
+ob9.scale.set(5,5,5);
+ob9.rotation.set(0,-1, 0);
+
+//iglu
+var ob10= iglu({x:0,y: 0,z:0});
+scene.add(ob10);
+ob10.position.set(-450,0, 100);
+ob10.scale.set(5,5,5);
+ob10.rotation.set(0,1, 0);
+
+//muñeco
+var ob11= muñe({x:0,y: 0,z:0});
+scene.add(ob11);
+ob11.position.set(350,0, 0);
+ob11.scale.set(5,5,5);
+ob11.rotation.set(0,-1, 0);
+
+//mesa
+var ob12= mesa({x:0,y: 0,z:0});
+scene.add(ob12);
+ob12.position.set(-630,5, -635);
+ob12.scale.set(4,5,4);
+ob12.rotation.set(0,1.57, 0);
+
+//regalosmesa
+var ob13= regalo({x:0,y: 0,z:0});
+scene.add(ob13);
+ob13.position.set(-765,75, -640);
+ob13.scale.set(2,4,2);
+ob13.rotation.set(0,1.57, 0);
+
+var ob14= reg2({x:0,y: 0,z:0});
+scene.add(ob14);
+ob14.position.set(-765,80, -560);
+ob14.scale.set(2,3.5,2);
+ob14.rotation.set(0,1.57, 0);
+
+var ob15= reg3({x:0,y: 0,z:0});
+scene.add(ob15);
+ob15.position.set(-765,80, -600);
+ob15.scale.set(2,3,2);
+ob15.rotation.set(0,1.57, 0);
+
+var ob15= reg3({x:0,y: 0,z:0});
+scene.add(ob15);
+ob15.position.set(-765,80, -600);
+ob15.scale.set(2,3,2);
+ob15.rotation.set(0,1.57, 0);
+
+var ob16= reg4({x:0,y: 0,z:0});
+scene.add(ob16);
+ob16.position.set(-765,80, -682);
+ob16.scale.set(2,3,2);
+ob16.rotation.set(0,1.57, 0);
+
+var ob17= reg5({x:0,y: 0,z:0});
+scene.add(ob17);
+ob17.position.set(-765,80, -720);
+ob17.scale.set(2,3,2);
+ob17.rotation.set(0,1.57, 0);
+
+var ob18= reg6({x:0,y: 0,z:0});
+scene.add(ob18);
+ob18.position.set(-730,80, -695);
+ob18.scale.set(2,1.5,2);
+ob18.rotation.set(0,1.57, 0);
+
+var ob19= reg7({x:0,y: 0,z:0});
+scene.add(ob19);
+ob19.position.set(-730,80, -655);
+ob19.scale.set(2,2.3,2);
+ob19.rotation.set(0,1.57, 0);
+
+var ob20= reg8({x:0,y: 0,z:0});
+scene.add(ob20);
+ob20.position.set(-730,80, -615);
+ob20.scale.set(2,2,2);
+ob20.rotation.set(0,1.57, 0);
+
+var ob21= reg9({x:0,y: 0,z:0});
+scene.add(ob21);
+ob21.position.set(-730,80, -575);
+ob21.scale.set(2,2,2);
+ob21.rotation.set(0,1.57, 0);
+
+var ob22= reg10({x:0,y: 0,z:0});
+scene.add(ob22);
+ob22.position.set(-740,8, -575);
+ob22.scale.set(4,4,4);
+ob22.rotation.set(0,1.57, 0);
+
+var ob23= reg4({x:0,y: 0,z:0});
+scene.add(ob23);
+ob23.position.set(-640,5, -710);
+ob23.scale.set(2.5,4,2.5);
+ob23.rotation.set(0,1, 0);
+
+var ob24= reg2({x:0,y: 0,z:0});
+scene.add(ob24);
+ob24.position.set(-680,5, -760);
+ob24.scale.set(3,3,3);
+ob24.rotation.set(0,1.2, 0);
+
+var ob25= reg5({x:0,y: 0,z:0});
+scene.add(ob25);
+ob25.position.set(-590,5, -700);
+ob25.scale.set(2,3,2);
+ob25.rotation.set(0,1.2, 0);
+
+var ob26= reg7({x:0,y: 0,z:0});
+scene.add(ob26);
+ob26.position.set(-590,5, -650);
+ob26.scale.set(2,2,2);
+ob26.rotation.set(0,1.2, 0);
+
+
+
+
+//plato
+var plat= plato({x:0,y: 0,z:0});
+scene.add(plat);
+plat.position.set(400,20, -710);
+plat.scale.set(5,5,5);
+plat.rotation.set(0,3.14, 0);
+plat.receiveShadow = true;
+plat.castShadow = true;
+
+ 
+var mes= mesa({x:0,y: 0,z:0});
+scene.add(mes);
+mes.position.set(450,5, -855);
+mes.scale.set(3.2,4,2);
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+
+      
+     
+
+
+
+    
+
+
+
+
+        
+
+
+
+
+
+        
+
+        
+
+
+
+
+        //🎰🎰Rendering y animación
+        requestAnimationFrame(render);
+        function render() {
+            //🪄🪄 Animación -
+
+            //🎮🎮Actualización del OrbitControls para generar la suavidad de movimiento
+            controls.update();
+
+            //Llamado para renderizar y volver a llamar a la misma función (render)
+            renderer.render(scene, camera);
+            requestAnimationFrame(render);
+
+            //animacion
+
+        }
+
+    </script>
+</body>
+
+</html>
